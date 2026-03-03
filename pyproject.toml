@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "joltax-cli"
+version = "0.1.0"
+description = "An interactive CLI explorer for the joltax taxonomy library"
+authors = [
+    { name="Daniel" }
+]
+readme = "CLI_BLUEPRINT.md"
+requires-python = ">=3.9"
+dependencies = [
+    "prompt_toolkit",
+    "rich",
+    "pyyaml"
+]
+
+[project.scripts]
+joltax = "joltax_cli.main:main"
