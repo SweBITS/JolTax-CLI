@@ -30,7 +30,7 @@ class JolTaxCompleter(Completer):
         """
         self.loader: TaxonomyLoader = loader
         self.commands: List[str] = [
-            "use", "build", "summary", "annotate", "find", "lineage", "help", "exit", "quit"
+            "use", "build", "summary", "annotate", "find", "lineage", "config", "help", "exit", "quit"
         ]
         self.current_ranks: List[str] = []
 

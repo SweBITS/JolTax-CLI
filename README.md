@@ -29,8 +29,9 @@ Ensure you have the `joltax` backend installed as well.
    ```bash
    joltax
    ```
+   *On your first run, a **Setup Wizard** will guide you through configuring your cache directory.*
 
-2. **Build a taxonomy cache (on first use):**
+2. **Build a taxonomy cache:**
    ```text
    joltax> build ncbi /path/to/ncbi_taxonomy/
    ```
@@ -51,6 +52,7 @@ Ensure you have the `joltax` backend installed as well.
 | `annotate <id>...` | Pretty-print canonical ranks (Domain, Phylum, etc.) for one or more IDs. |
 | `find <query>` | Fuzzy search for taxonomic names using the RapidFuzz index. |
 | `lineage <id>` | Display a visual tree of the taxonomic path to the root. |
+| `config` | Re-run the interactive setup wizard to change the cache directory. |
 | `summary` | Overview of node counts, versions, and provenance metadata. |
 | `help` | List all available commands. |
 | `exit` / `quit` | Exit the interactive shell. |

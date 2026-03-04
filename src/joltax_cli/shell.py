@@ -15,6 +15,7 @@ from rich.table import Table
 from .loader import TaxonomyLoader, JolTree
 from .formatter import format_dataframe, format_lineage, format_find_results
 from .completer import JolTaxCompleter
+from .config import setup_wizard
 
 # Set up logging for the module
 logger = logging.getLogger(__name__)
@@ -95,6 +96,8 @@ class JolTaxShell:
                     self.handle_find(args)
                 elif command == "lineage":
                     self.handle_lineage(args)
+                elif command == "config":
+                    self.handle_config()
                 else:
                     self.console.print(f"[red]Unknown command: {command}[/red]")
 
@@ -119,6 +122,7 @@ class JolTaxShell:
         table.add_row("annotate <id>...", "Pretty-print canonical ranks for one or more tax IDs.")
         table.add_row("find <query>", "Fuzzy search for tax IDs by name.")
         table.add_row("lineage <id>", "Display the lineage of a tax ID as a visual tree.")
+        table.add_row("config", "Re-run the setup wizard to configure the cache directory.")
         table.add_row("help", "Show this help message.")
         table.add_row("exit / quit", "Exit the interactive shell.")
         self.console.print(table)
@@ -282,3 +286,10 @@ class JolTaxShell:
         except Exception as e:
             self.console.print(f"[red]Error fetching lineage:[/red] {e}")
             logger.error(f"Lineage lookup failed for ID '{tax_id}': {e}")
+
+    def handle_config(self) -> None:
+        """Handles the 'config' command to re-run the setup wizard."""
+        setup_wizard(force=True)
+        # Refresh the loader's cache dir in case it changed
+        from .config import get_cache_dir
+        self.loader.cache_dir = get_cache_dir()

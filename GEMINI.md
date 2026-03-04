@@ -47,13 +47,22 @@ To maintain the same "air" and performance standards as the core library, the fo
 - `find <query>`: Fuzzy name search using the library's `rapidfuzz`-backed index.
 - `lineage <tax_id>`: Visual tree representation utilizing Euler Tour traversal logic.
 - `summary`: Overview of node counts, versions, and provenance metadata.
+- `config`: Re-run the interactive setup wizard to configure the cache directory.
 - `help` / `exit` / `quit`: Standard shell navigation.
 
 ## 7. Current Implementation State
 - [x] Project Scaffolding & `pyproject.toml`.
-- [x] Configuration Management (YAML).
+- [x] Configuration Management (YAML) with Setup Wizard.
 - [x] Vectorized Taxonomy Loader (Load/Save/Build logic fixed).
 - [x] Interactive REPL with history and context-aware auto-completion.
 - [x] Pretty-printing for DataFrames (`rich.table`) and Lineages (`rich.tree`).
 - [x] Pager support for large result sets.
 - [x] Unit tests for Shell UI and command handlers.
+- [x] Enhanced code documentation, typing, and logging.
+
+## 8. Selected Roadmap
+- [ ] **Persistent Shell History:** Switch from `InMemoryHistory` to `FileHistory` (storing in `~/.config/joltax/history`) for cross-session commands.
+- [ ] **Batch & CLI Mode:** Support running commands via CLI arguments (e.g., `joltax annotate 9606`) or piping from stdin.
+- [ ] **Export Support:** Add `--output` flags to commands like `annotate` and `find` to save results as CSV, TSV, or Parquet using Polars.
+- [ ] **Clipboard Integration:** Commands to copy IDs or lineage trees directly to the system clipboard.
+- [ ] **Distribution:** Finalize `pyproject.toml` and package structure for PyPI and Bioconda releases.
