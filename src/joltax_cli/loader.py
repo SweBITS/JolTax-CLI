@@ -110,7 +110,6 @@ class TaxonomyLoader:
             return None
         
         try:
-            logger.info(f"Loading taxonomy cache from {tax_path}...")
             tree = JolTree.load(str(tax_path))
             return tree
         except Exception as e:
@@ -135,13 +134,10 @@ class TaxonomyLoader:
         tax_path = self.cache_dir / name
         try:
             if arg2:
-                logger.info(f"Building taxonomy from nodes: {arg1} and names: {arg2}")
                 tree = JolTree(nodes=arg1, names=arg2)
             else:
-                logger.info(f"Building taxonomy from directory: {arg1}")
                 tree = JolTree(tax_dir=arg1)
                 
-            logger.info(f"Saving binary cache to {tax_path}...")
             tree.save(str(tax_path))
             return tax_path
         except Exception as e:

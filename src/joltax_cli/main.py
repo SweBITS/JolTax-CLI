@@ -6,15 +6,17 @@ Initializes the configuration, loader, and starts the interactive shell.
 
 import sys
 import logging
+from rich.logging import RichHandler
 from .loader import TaxonomyLoader
 from .config import load_config
 from .shell import JolTaxShell
 
-# Set up global logging for the application
+# Configure global logging with RichHandler
 logging.basicConfig(
-    format='%(asctime)s %(levelname)-8s %(message)s',
     level=logging.INFO,
-    datefmt='%Y-%m-%d [%H:%M:%S]'
+    format="%(message)s",
+    datefmt="[%X]",
+    handlers=[RichHandler(rich_tracebacks=True, show_path=False)]
 )
 
 def main() -> None:

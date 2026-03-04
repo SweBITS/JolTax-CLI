@@ -173,16 +173,15 @@ class JolTaxShell:
         arg1: str = args[1]
         arg2: Optional[str] = args[2] if len(args) > 2 else None
         
-        with self.console.status(f"[bold green]Building taxonomy cache '{name}'... This may take a moment."):
+        with self.console.status(f"[bold green]Building taxonomy cache '{name}'..."):
             try:
                 tax_path = self.loader.build_taxonomy(name, arg1, arg2)
                 self.console.print(
-                    f"[green]Successfully built and saved taxonomy '{name}' to {tax_path}.[/green]"
+                    f"[bold green]✓[/bold green] Successfully built and saved taxonomy '{name}' to {tax_path}."
                 )
                 self.console.print(f"You can now load it using: [cyan]use {name}[/cyan]")
             except Exception as e:
                 self.console.print(f"[red]Error building taxonomy:[/red] {e}")
-                logger.error(f"Build failed for taxonomy '{name}': {e}")
 
     def handle_use(self, args: List[str], silent: bool = False) -> None:
         """
@@ -203,9 +202,6 @@ class JolTaxShell:
             return
 
         name: str = args[0]
-        if not silent:
-            self.console.print(f"Loading taxonomy '{name}'...")
-        
         tree = self.loader.load_taxonomy(name)
         if tree:
             self.current_tree = tree
@@ -220,7 +216,7 @@ class JolTaxShell:
             save_config(config)
             
             if not silent:
-                self.console.print(f"[green]Successfully loaded '{name}'.[/green]")
+                self.console.print(f"[bold green]✓[/bold green] Switched to taxonomy '{name}'.")
 
     def handle_remove(self, args: List[str]) -> None:
         """
