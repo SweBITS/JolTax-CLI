@@ -8,7 +8,7 @@ import sys
 import logging
 from typing import Optional, List, Union, Any
 from prompt_toolkit import PromptSession
-from prompt_toolkit.history import InMemoryHistory
+from prompt_toolkit.history import FileHistory
 from rich.console import Console
 from rich.table import Table
 from rich.prompt import Confirm
@@ -16,7 +16,7 @@ from rich.prompt import Confirm
 from .loader import TaxonomyLoader, JolTree
 from .formatter import format_dataframe, format_lineage, format_find_results
 from .completer import JolTaxCompleter
-from .config import setup_wizard
+from .config import setup_wizard, DEFAULT_CONFIG_DIR
 
 # Set up logging for the module
 logger = logging.getLogger(__name__)
@@ -36,15 +36,19 @@ class JolTaxShell:
 
     def __init__(self, loader: TaxonomyLoader):
         """
-        Initializes the shell with a taxonomy loader.
+        Initializes the shell with a taxonomy loader and persistent history.
 
         Args:
             loader: The loader instance for managing taxonomy data.
         """
         self.loader: TaxonomyLoader = loader
         self.completer: JolTaxCompleter = JolTaxCompleter(loader)
+        
+        # Path for persistent history
+        history_path = DEFAULT_CONFIG_DIR / "history"
+        
         self.session: PromptSession = PromptSession(
-            history=InMemoryHistory(),
+            history=FileHistory(str(history_path)),
             completer=self.completer
         )
         self.console: Console = Console()

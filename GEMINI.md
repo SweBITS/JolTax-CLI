@@ -61,7 +61,7 @@ To maintain the same "air" and performance standards as the core library, the fo
 - [x] Enhanced code documentation, typing, and logging.
 
 ## 8. Selected Roadmap
-- [ ] **Persistent Shell History:** Switch from `InMemoryHistory` to `FileHistory` (storing in `~/.config/joltax/history`) for cross-session commands.
+- [x] **Persistent Shell History:** Switch from `InMemoryHistory` to `FileHistory` (storing in `~/.joltax-cli/history`) for cross-session commands.
 - [ ] **Batch & CLI Mode:** Support running commands via CLI arguments (e.g., `joltax annotate 9606`) or piping from stdin.
 - [ ] **Export Support:** Add `--output` flags to commands like `annotate` and `find` to save results as CSV, TSV, or Parquet using Polars.
 - [ ] **Clipboard Integration:** Commands to copy IDs or lineage trees directly to the system clipboard.
