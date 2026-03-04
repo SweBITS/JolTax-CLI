@@ -1,18 +1,16 @@
 # JolTax-CLI
 
-**JolTax-CLI** is an interactive, high-performance "Taxonomic Shell" for exploring and querying biological taxonomies. It is built on top of the `joltax` library, leveraging vectorized operations and binary caches to provide nearly instantaneous results even for massive datasets like the NCBI taxonomy.
+**JolTax-CLI** is an interactive "Taxonomic Shell" for exploring and querying taxonomies. It is built on top of the [`JolTax`](https://github.com/SweBiTS/JolTax) library, leveraging vectorized operations and binary caches to provide nearly instantaneous results even for massive datasets like the NCBI taxonomy.
 
-## 🚀 Key Features
+## Key Features
 
 - **Interactive REPL:** A persistent shell environment with context-aware auto-completion, command history, and a real-time status bar.
 - **Sleek UX:** Features syntax highlighting, interactive taxonomy selection, and live memory usage tracking.
-- **High Performance:** Utilizes the `joltax` vectorized backend for $O(1)$ and $O(\log N)$ taxonomic queries.
-- **Beautiful UI:** Pretty-printed tables, visual lineage trees, and dashboard-style summaries powered by `rich`.
+- **High Performance:** Utilizes the `JolTax` vectorized backend for $O(1)$ and $O(\log N)$ taxonomic queries.
 - **Flexible Configuration:** Manage multiple taxonomy caches (e.g., NCBI, GTDB) and switch between them seamlessly.
-- **Pager Support:** Long results (like mass annotations) automatically open in a pager (like `less`) for easy reading.
 - **Direct Build:** Create optimized binary caches directly from NCBI-style `.dmp` files.
 
-## 🛠 Installation
+## Installation
 
 Currently, JolTax-CLI can be installed from source:
 
@@ -22,9 +20,9 @@ cd JolTax-CLI
 pip install -e .
 ```
 
-Ensure you have the `joltax` backend and other core dependencies (`polars`, `psutil`, `pygments`) installed.
+Ensure you have the `JolTax` backend and other core dependencies (`polars`, `psutil`, `pygments`) installed.
 
-## 🏁 Quick Start
+## Quick Start
 
 1. **Launch the shell:**
    ```bash
@@ -44,7 +42,7 @@ Ensure you have the `joltax` backend and other core dependencies (`polars`, `psu
    joltax(ncbi)> annotate 9606
    ```
 
-## ⌨️ Command Reference
+## Command Reference
 
 | Command | Description |
 | :--- | :--- |
@@ -59,16 +57,6 @@ Ensure you have the `joltax` backend and other core dependencies (`polars`, `psu
 | `help` | List all available commands. |
 | `exit` / `quit` | Exit the interactive shell. |
 
-## ⚙️ Configuration
+## Configuration
 
-JolTax-CLI stores its configuration in `~/.joltax-cli/config.yaml`. You can modify the `cache_dir` setting to change where taxonomy binaries are stored.
-
-## 🧪 Architecture & Performance
-
-JolTax-CLI is designed with the same performance philosophy as the core `joltax` library:
-- **Zero-Copy Loading:** Binary caches use NumPy `.npy` and Apache Arrow IPC for instantaneous loading.
-- **Vectorized Lookups:** Mass-annotations are performed as batch operations rather than individual node traversals.
-- **Euler Tour Indexing:** Clade and lineage operations are optimized for speed using pre-calculated traversal timestamps.
-
----
-Developed by the **SweBiTS** team.
+JolTax-CLI stores its configuration in `~/.joltax-cli/config.yaml` by default. You can modify the `cache_dir` setting to change where taxonomy binaries are stored.
