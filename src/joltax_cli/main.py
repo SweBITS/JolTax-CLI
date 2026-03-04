@@ -8,15 +8,15 @@ import sys
 import logging
 from rich.logging import RichHandler
 from .loader import TaxonomyLoader
-from .config import load_config
+from .config import load_config, console
 from .shell import JolTaxShell
 
-# Configure global logging with RichHandler
+# Configure global logging with RichHandler using the shared console
 logging.basicConfig(
     level=logging.INFO,
     format="%(message)s",
     datefmt="[%X]",
-    handlers=[RichHandler(rich_tracebacks=True, show_path=False)]
+    handlers=[RichHandler(console=console, rich_tracebacks=True, show_path=False)]
 )
 
 def main() -> None:

@@ -16,7 +16,7 @@ from rich.prompt import Confirm
 from .loader import TaxonomyLoader, JolTree
 from .formatter import format_dataframe, format_lineage, format_find_results
 from .completer import JolTaxCompleter
-from .config import setup_wizard, DEFAULT_CONFIG_DIR, load_config, save_config
+from .config import setup_wizard, DEFAULT_CONFIG_DIR, load_config, save_config, console
 
 # Set up logging for the module
 logger = logging.getLogger(__name__)
@@ -51,7 +51,8 @@ class JolTaxShell:
             history=FileHistory(str(history_path)),
             completer=self.completer
         )
-        self.console: Console = Console()
+        # Use the shared console instance from config.py
+        self.console: Console = console
         self.current_tree: Optional[JolTree] = None
         self.current_name: Optional[str] = None
 
