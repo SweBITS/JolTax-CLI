@@ -74,16 +74,24 @@ class JolTaxShell:
         Handles user input, dispatches commands, and catches exceptions.
         """
         self.console.print("[bold blue]JolTax-CLI Interactive Shell[/bold blue]")
-        self.console.print("Type 'help' for commands, 'exit' or Ctrl+D to quit.")
+        self.console.print("Type 'help' for commands, 'exit' or Ctrl+D to quit.\n")
 
         # Auto-load the last used taxonomy from config
         config = load_config()
         last_tax = config.get("last_taxonomy")
-        if last_tax:
-            # Check if it actually exists in cache before trying to load it
-            if last_tax in self.loader.list_available_taxonomies():
-                self.console.print(f"Auto-loading last used taxonomy: [cyan]{last_tax}[/cyan]")
-                self.handle_use([last_tax], silent=True)
+        
+        if last_tax and last_tax in self.loader.list_available_taxonomies():
+            self.handle_use([last_tax], silent=True)
+            self.console.print(f"[bold green]Status:[/bold green] Active taxonomy: [bold cyan]{last_tax}[/bold cyan]")
+        else:
+            available_count = len(self.loader.list_available_taxonomies())
+            self.console.print("[bold yellow]Status:[/bold yellow] No taxonomy loaded.")
+            if available_count > 0:
+                self.console.print(f"        {available_count} taxonomies available in cache. Use '[bold]use[/bold]' to load one.")
+            else:
+                self.console.print("        Cache is empty. Use '[bold]build[/bold]' to create your first taxonomy.")
+        
+        self.console.print("") # Trailing newline for spacing
 
         while True:
             try:
