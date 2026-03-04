@@ -174,6 +174,16 @@ class JolTaxShell:
         arg1: str = args[1]
         arg2: Optional[str] = args[2] if len(args) > 2 else None
         
+        # Check if taxonomy already exists
+        tax_path = self.loader.cache_dir / name
+        if tax_path.exists():
+            if not Confirm.ask(
+                f"[yellow]Warning:[/yellow] Taxonomy '[bold]{name}[/bold]' already exists. "
+                "Do you want to [bold red]overwrite[/bold red] it?"
+            ):
+                self.console.print("Build cancelled.")
+                return
+
         with self.console.status(f"[bold green]Building taxonomy cache '{name}'..."):
             try:
                 tax_path = self.loader.build_taxonomy(name, arg1, arg2)
