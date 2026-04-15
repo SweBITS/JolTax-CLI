@@ -13,17 +13,17 @@ from typing import List, Optional, Union
 logger = logging.getLogger(__name__)
 
 def _check_joltax_version(version_str: str) -> bool:
-    """Helper to check if joltax version is >= 0.2.0."""
+    """Helper to check if joltax version is >= 0.4.0."""
     try:
         parts = [int(p) for p in version_str.split('.')]
-        return parts[0] >= 1 or (parts[0] == 0 and parts[1] >= 2)
+        return parts[0] >= 1 or (parts[0] == 0 and parts[1] >= 4)
     except (ValueError, IndexError):
         return False
 
 try:
     from joltax import JolTree, __version__ as joltax_version
     if not _check_joltax_version(joltax_version):
-        raise ImportError(f"Incompatible joltax version: {joltax_version}. Required: >= 0.2.0")
+        raise ImportError(f"Incompatible joltax version: {joltax_version}. Required: >= 0.4.0")
 except ImportError as e:
     import polars as pl
     import numpy as np
@@ -65,6 +65,8 @@ except ImportError as e:
             # Ensure we return rows in the order of input IDs for lineage support
             return pl.DataFrame({
                 "t_id": ids,
+                "t_macro_group": ["Bacteria"] * len(ids),
+                "t_root": ["cellular"] * len(ids),
                 "t_domain": ["Eukarya"] * len(ids),
                 "t_phylum": ["Chordata"] * len(ids),
                 "t_scientific_name": [f"Name_{i}" for i in ids],

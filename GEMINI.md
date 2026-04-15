@@ -63,6 +63,7 @@ To maintain the same "air" and performance standards as the core library, the fo
 - [x] Unit tests for Shell UI and command handlers.
 - [x] Enhanced code documentation, typing, and logging.
 - [x] Auto-reload last used taxonomy on startup.
+- [x] **VERSION 0.1.1 RELEASED:** Support for `joltax` v0.4.0 and the new `t_macro_group` column in annotation results.
 
 ## 8. Selected Roadmap
 - [x] **Persistent Shell History:** Switch from `InMemoryHistory` to `FileHistory` (storing in `~/.joltax-cli/history`) for cross-session commands.

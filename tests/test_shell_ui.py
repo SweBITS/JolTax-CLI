@@ -17,7 +17,7 @@ def test_shell_commands():
         "build_time": "2026-03-01",
         "source_nodes": "nodes.dmp",
         "source_names": "names.dmp",
-        "package_version": "0.2.0",
+        "package_version": "0.4.0",
         "max_depth": 5,
         "ranks_present": 2
     })
@@ -26,6 +26,8 @@ def test_shell_commands():
         # New format with t_ prefix
         return pl.DataFrame({
             "t_id": ids,
+            "t_macro_group": ["Bacteria"] * len(ids),
+            "t_root": ["cellular"] * len(ids),
             "t_domain": ["Eukaryota"] * len(ids),
             "t_phylum": ["Chordata"] * len(ids),
             "t_scientific_name": [f"Name_{i}" for i in ids],

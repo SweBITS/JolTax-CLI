@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "joltax-cli"
-version = "0.1.0"
+version = "0.1.1"
 description = "An interactive CLI explorer for the joltax taxonomy library"
 authors = [
     { name="Daniel" }
@@ -16,7 +16,7 @@ dependencies = [
     "rich",
     "pyyaml",
     "polars",
-    "joltax>=0.3.0",
+    "joltax>=0.4.0",
     "pygments",
     "psutil"
 ]
