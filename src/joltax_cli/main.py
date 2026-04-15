@@ -43,7 +43,9 @@ def main() -> None:
         shell.run()
     except ImportError as e:
         if "Incompatible joltax version" in str(e):
-            print("Incompatible JolTax version, please upgrade.")
+            # Extract version info from the error message raised in loader.py
+            version_info = str(e).replace("Incompatible joltax version: ", "")
+            print(f"Incompatible JolTax version, please upgrade ({version_info})")
         else:
             print(f"Import Error: {e}")
         sys.exit(1)
